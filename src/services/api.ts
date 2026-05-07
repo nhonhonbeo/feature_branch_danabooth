@@ -32,17 +32,18 @@ export const api = {
   },
 };
 
-export const swrFetcher = ([key, ...args]: [string, ...unknown[]]) => {
+export const swrFetcher = ((arg: unknown): Promise<unknown> => {
+  const [key, ...args] = Array.isArray(arg) ? arg : [arg];
   switch (key) {
     case "locations":
       return api.getLocations();
     case "location":
-      return api.getLocation(args[0] as string);
+      return api.getLocation(args[0] as string) as Promise<unknown>;
     case "vouchers":
       return api.getVouchers();
     case "notifications":
       return api.getNotifications();
     default:
-      throw new Error(`Unknown SWR key: ${key}`);
+      throw new Error(`Unknown SWR key: ${String(key)}`);
   }
-};
+}) as <T>(arg: unknown) => Promise<T>;
