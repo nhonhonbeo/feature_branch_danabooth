@@ -9,38 +9,226 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as ActivateIndexRouteImport } from './routes/activate.index'
+import { Route as AppVouchersRouteImport } from './routes/app.vouchers'
+import { Route as AppStampsRouteImport } from './routes/app.stamps'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppScanRouteImport } from './routes/app.scan'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
+import { Route as ActivateScanRouteImport } from './routes/activate.scan'
+import { Route as AppJourneyIndexRouteImport } from './routes/app.journey.index'
+import { Route as AppLocationIdRouteImport } from './routes/app.location.$id'
+import { Route as AppJourneyImportRouteImport } from './routes/app.journey.import'
 
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const ActivateIndexRoute = ActivateIndexRouteImport.update({
+  id: '/activate/',
+  path: '/activate/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppVouchersRoute = AppVouchersRouteImport.update({
+  id: '/vouchers',
+  path: '/vouchers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppStampsRoute = AppStampsRouteImport.update({
+  id: '/stamps',
+  path: '/stamps',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppScanRoute = AppScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const ActivateScanRoute = ActivateScanRouteImport.update({
+  id: '/activate/scan',
+  path: '/activate/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppJourneyIndexRoute = AppJourneyIndexRouteImport.update({
+  id: '/journey/',
+  path: '/journey/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLocationIdRoute = AppLocationIdRouteImport.update({
+  id: '/location/$id',
+  path: '/location/$id',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppJourneyImportRoute = AppJourneyImportRouteImport.update({
+  id: '/journey/import',
+  path: '/journey/import',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/activate/scan': typeof ActivateScanRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/scan': typeof AppScanRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/stamps': typeof AppStampsRoute
+  '/app/vouchers': typeof AppVouchersRoute
+  '/activate/': typeof ActivateIndexRoute
+  '/app/': typeof AppIndexRoute
+  '/app/journey/import': typeof AppJourneyImportRoute
+  '/app/location/$id': typeof AppLocationIdRoute
+  '/app/journey/': typeof AppJourneyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRoute
+  '/activate/scan': typeof ActivateScanRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/scan': typeof AppScanRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/stamps': typeof AppStampsRoute
+  '/app/vouchers': typeof AppVouchersRoute
+  '/activate': typeof ActivateIndexRoute
+  '/app': typeof AppIndexRoute
+  '/app/journey/import': typeof AppJourneyImportRoute
+  '/app/location/$id': typeof AppLocationIdRoute
+  '/app/journey': typeof AppJourneyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/activate/scan': typeof ActivateScanRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/scan': typeof AppScanRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/stamps': typeof AppStampsRoute
+  '/app/vouchers': typeof AppVouchersRoute
+  '/activate/': typeof ActivateIndexRoute
+  '/app/': typeof AppIndexRoute
+  '/app/journey/import': typeof AppJourneyImportRoute
+  '/app/location/$id': typeof AppLocationIdRoute
+  '/app/journey/': typeof AppJourneyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/onboarding'
+    | '/activate/scan'
+    | '/app/notifications'
+    | '/app/profile'
+    | '/app/scan'
+    | '/app/settings'
+    | '/app/stamps'
+    | '/app/vouchers'
+    | '/activate/'
+    | '/app/'
+    | '/app/journey/import'
+    | '/app/location/$id'
+    | '/app/journey/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/onboarding'
+    | '/activate/scan'
+    | '/app/notifications'
+    | '/app/profile'
+    | '/app/scan'
+    | '/app/settings'
+    | '/app/stamps'
+    | '/app/vouchers'
+    | '/activate'
+    | '/app'
+    | '/app/journey/import'
+    | '/app/location/$id'
+    | '/app/journey'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/onboarding'
+    | '/activate/scan'
+    | '/app/notifications'
+    | '/app/profile'
+    | '/app/scan'
+    | '/app/settings'
+    | '/app/stamps'
+    | '/app/vouchers'
+    | '/activate/'
+    | '/app/'
+    | '/app/journey/import'
+    | '/app/location/$id'
+    | '/app/journey/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  OnboardingRoute: typeof OnboardingRoute
+  ActivateScanRoute: typeof ActivateScanRoute
+  ActivateIndexRoute: typeof ActivateIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +236,128 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/activate/': {
+      id: '/activate/'
+      path: '/activate'
+      fullPath: '/activate/'
+      preLoaderRoute: typeof ActivateIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/vouchers': {
+      id: '/app/vouchers'
+      path: '/vouchers'
+      fullPath: '/app/vouchers'
+      preLoaderRoute: typeof AppVouchersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/stamps': {
+      id: '/app/stamps'
+      path: '/stamps'
+      fullPath: '/app/stamps'
+      preLoaderRoute: typeof AppStampsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/scan': {
+      id: '/app/scan'
+      path: '/scan'
+      fullPath: '/app/scan'
+      preLoaderRoute: typeof AppScanRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notifications': {
+      id: '/app/notifications'
+      path: '/notifications'
+      fullPath: '/app/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/activate/scan': {
+      id: '/activate/scan'
+      path: '/activate/scan'
+      fullPath: '/activate/scan'
+      preLoaderRoute: typeof ActivateScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/journey/': {
+      id: '/app/journey/'
+      path: '/journey'
+      fullPath: '/app/journey/'
+      preLoaderRoute: typeof AppJourneyIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/location/$id': {
+      id: '/app/location/$id'
+      path: '/location/$id'
+      fullPath: '/app/location/$id'
+      preLoaderRoute: typeof AppLocationIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/journey/import': {
+      id: '/app/journey/import'
+      path: '/journey/import'
+      fullPath: '/app/journey/import'
+      preLoaderRoute: typeof AppJourneyImportRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppScanRoute: typeof AppScanRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppStampsRoute: typeof AppStampsRoute
+  AppVouchersRoute: typeof AppVouchersRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppJourneyImportRoute: typeof AppJourneyImportRoute
+  AppLocationIdRoute: typeof AppLocationIdRoute
+  AppJourneyIndexRoute: typeof AppJourneyIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppScanRoute: AppScanRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppStampsRoute: AppStampsRoute,
+  AppVouchersRoute: AppVouchersRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppJourneyImportRoute: AppJourneyImportRoute,
+  AppLocationIdRoute: AppLocationIdRoute,
+  AppJourneyIndexRoute: AppJourneyIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  OnboardingRoute: OnboardingRoute,
+  ActivateScanRoute: ActivateScanRoute,
+  ActivateIndexRoute: ActivateIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
