@@ -7,7 +7,7 @@ import { Settings, Bell, Globe, Download, Share2, ChevronRight } from "lucide-re
 import { swrFetcher } from "@/services/api";
 import type { Location } from "@/types";
 import { TopBar } from "@/components/layout/TopBar";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { useLocale } from "@/hooks/useLocale";
 import { CountUp } from "@/components/ui/count-up";
 import { FadeIn } from "@/components/ui/motion-primitives";

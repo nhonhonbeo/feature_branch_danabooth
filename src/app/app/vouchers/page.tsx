@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { swrFetcher } from "@/services/api";
 import type { Voucher } from "@/types";
 import { TopBar } from "@/components/layout/TopBar";
-import { VoucherCard } from "@/components/features/VoucherCard";
+import { VoucherCard } from "@/features/stamps/components/VoucherCard";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { useLocale } from "@/hooks/useLocale";
 import { Stagger, StaggerItem } from "@/components/ui/motion-primitives";
 

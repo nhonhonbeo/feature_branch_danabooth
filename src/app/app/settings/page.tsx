@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Globe, Bell, Trash2, Shield, Info, ChevronRight } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
 import { useLocale } from "@/hooks/useLocale";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 
 
 

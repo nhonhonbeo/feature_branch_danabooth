@@ -4,8 +4,8 @@
 import useSWR from "swr";
 import { swrFetcher } from "@/services/api";
 import { TopBar } from "@/components/layout/TopBar";
-import { StampBadge } from "@/components/features/StampBadge";
-import { usePassportStore } from "@/store/passport.store";
+import { StampBadge } from "@/features/stamps/components/StampBadge";
+import { usePassportStore } from "@/features/passport/store";
 import { useLocale } from "@/hooks/useLocale";
 import type { Location } from "@/types";
 import { Stagger, StaggerItem, FadeIn } from "@/components/ui/motion-primitives";

@@ -1,4 +1,4 @@
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { dict, t as translate, type DictKey } from "@/lib/i18n";
 import type { Bilingual } from "@/types";
 

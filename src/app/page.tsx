@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { QrCode, KeyRound, ArrowRight } from "lucide-react";
 import { useLocale } from "@/hooks/useLocale";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { FadeIn } from "@/components/ui/motion-primitives";
 
 export default function Landing() {

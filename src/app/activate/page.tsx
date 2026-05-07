@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLocale } from "@/hooks/useLocale";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { TopBar } from "@/components/layout/TopBar";
 import { api } from "@/services/api";
 

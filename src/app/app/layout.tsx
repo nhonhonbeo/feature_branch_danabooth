@@ -2,7 +2,7 @@
 
 
 import { BottomNav } from "@/components/layout/BottomNav";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

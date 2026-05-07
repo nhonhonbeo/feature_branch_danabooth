@@ -9,7 +9,7 @@ import { MapPin, QrCode, Star, Share2, Heart, Clock } from "lucide-react";
 import { swrFetcher } from "@/services/api";
 import type { Location } from "@/types";
 import { useLocale } from "@/hooks/useLocale";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { CATEGORIES } from "@/mocks/locations";
 import { TopBar } from "@/components/layout/TopBar";
 import { FadeIn } from "@/components/ui/motion-primitives";

@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { QrScanner } from "@/components/features/QrScanner";
+import { QrScanner } from "@/features/stamps/components/QrScanner";
 import { TopBar } from "@/components/layout/TopBar";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 
 
 

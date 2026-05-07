@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { useLocale } from "@/hooks/useLocale";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { CATEGORIES } from "@/mocks/locations";
 import { CountUp } from "@/components/ui/count-up";
 import { FadeIn } from "@/components/ui/motion-primitives";

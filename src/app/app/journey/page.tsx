@@ -7,7 +7,7 @@ import { Share2, Download, Plus } from "lucide-react";
 import { swrFetcher } from "@/services/api";
 import type { Location } from "@/types";
 import { TopBar } from "@/components/layout/TopBar";
-import { usePassportStore } from "@/store/passport.store";
+import { usePassportStore } from "@/features/passport/store";
 import { useLocale } from "@/hooks/useLocale";
 import { FadeIn, Stagger, StaggerItem } from "@/components/ui/motion-primitives";
 
