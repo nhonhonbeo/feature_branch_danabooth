@@ -1,4 +1,5 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Map, BookmarkCheck, QrCode, Ticket, User } from "lucide-react";
 import { useLocale } from "@/hooks/useLocale";
@@ -14,7 +15,7 @@ const items = [
 
 export function BottomNav() {
   const { t } = useLocale();
-  const path = useRouterState({ select: (s) => s.location.pathname });
+  const path = usePathname();
 
   return (
     <nav
@@ -33,7 +34,7 @@ export function BottomNav() {
               return (
                 <Link
                   key={it.to}
-                  to={it.to}
+                  href={it.to}
                   className="relative -mt-6 flex flex-col items-center justify-center"
                 >
                   <motion.div
@@ -50,7 +51,7 @@ export function BottomNav() {
             return (
               <Link
                 key={it.to}
-                to={it.to}
+                href={it.to}
                 className="flex-1 flex flex-col items-center gap-1 py-2 tap-highlight-none"
               >
                 <motion.div

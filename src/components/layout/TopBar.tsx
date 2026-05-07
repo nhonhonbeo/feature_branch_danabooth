@@ -1,4 +1,5 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import type { ReactNode } from "react";
@@ -25,7 +26,7 @@ export function TopBar({ title, back, right, transparent, onBack }: TopBarProps)
           {back ? (
             <motion.button
               whileTap={{ scale: 0.9 }}
-              onClick={() => (onBack ? onBack() : router.history.back())}
+              onClick={() => (onBack ? onBack() : router.back())}
               className="w-10 h-10 -ml-2 flex items-center justify-center rounded-full text-ink tap-highlight-none"
               aria-label="Back"
             >
@@ -33,7 +34,7 @@ export function TopBar({ title, back, right, transparent, onBack }: TopBarProps)
             </motion.button>
           ) : (
             <Link
-              to="/app"
+              href="/app"
               className="text-tagline font-semibold tracking-tight text-ink"
             >
               D.

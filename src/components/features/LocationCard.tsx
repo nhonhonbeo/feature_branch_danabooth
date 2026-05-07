@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, Star } from "lucide-react";
 import type { Location } from "@/types";
@@ -18,8 +18,7 @@ export function LocationCard({ location, collected, variant = "card" }: Props) {
   if (variant === "row") {
     return (
       <Link
-        to="/app/location/$id"
-        params={{ id: location.id }}
+        href={`/app/location/${location.id}`}
         className="flex gap-3 p-2 rounded-2xl hover:bg-parchment/60 transition-colors tap-highlight-none"
       >
         <div className="w-16 h-16 rounded-xl overflow-hidden bg-parchment shrink-0 relative">
@@ -54,8 +53,7 @@ export function LocationCard({ location, collected, variant = "card" }: Props) {
 
   return (
     <Link
-      to="/app/location/$id"
-      params={{ id: location.id }}
+      href={`/app/location/${location.id}`}
       className="block group tap-highlight-none"
     >
       <motion.div
