@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "DanangBooth Passport" },
+      { name: "description", content: "DanangBooth đến rồi đây" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "DanangBooth Passport" },
+      { property: "og:description", content: "DanangBooth đến rồi đây" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "DanangBooth Passport" },
+      { name: "twitter:description", content: "DanangBooth đến rồi đây" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3e477b75-efe0-473b-8a68-a1524f7f5fc1/id-preview-8751f6e9--bd18d7bf-0236-42de-a691-76d59565e660.lovable.app-1778123266625.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3e477b75-efe0-473b-8a68-a1524f7f5fc1/id-preview-8751f6e9--bd18d7bf-0236-42de-a691-76d59565e660.lovable.app-1778123266625.png" },
     ],
     links: [
       {
