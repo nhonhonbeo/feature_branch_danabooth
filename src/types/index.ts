@@ -65,6 +65,17 @@ export interface Passport {
   isActivated: boolean;
 }
 
+export type DemoMode = "auto" | "force_pending" | "force_activated";
+
+export interface DemoPassportSeed {
+  seedId: string;
+  qrId: string;
+  passport: Passport;
+  stamps: Stamp[];
+  redeemedVoucherIds: string[];
+  hasOnboarded: boolean;
+}
+
 export interface JourneyDay {
   date: string; // ISO date
   items: Array<{
@@ -72,4 +83,31 @@ export interface JourneyDay {
     plannedAt?: string;
     completedAt?: string;
   }>;
+}
+
+export interface JourneyCheckinPoint {
+  name: string;
+  lat: number;
+  lng: number;
+}
+
+export type ShareCardFormat = "story-9x16";
+
+export interface ShareCardDraft {
+  format: ShareCardFormat;
+  imageDataUrl: string | null;
+  points: JourneyCheckinPoint[];
+  useDemoData: boolean;
+}
+
+export interface ShareCardRenderResult {
+  dataUrl: string;
+  width: number;
+  height: number;
+  fileName: string;
+}
+
+export interface JourneyRouteOverlay {
+  coordinates: number[][];
+  distanceKm: number;
 }

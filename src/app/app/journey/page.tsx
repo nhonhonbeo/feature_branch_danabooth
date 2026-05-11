@@ -33,9 +33,9 @@ export default function Journey() {
         back
         title={locale === "vi" ? "Hành trình" : "My Journey"}
         right={
-          <button className="w-10 h-10 flex items-center justify-center text-ink">
+          <Link href="/app/journey/share" className="w-10 h-10 flex items-center justify-center text-ink">
             <Share2 className="w-5 h-5" />
-          </button>
+          </Link>
         }
       />
 
@@ -65,12 +65,18 @@ export default function Journey() {
             </div>
           </div>
           <div className="mt-6 flex gap-2">
-            <button className="flex-1 bg-canvas text-ink rounded-full py-3 text-caption font-semibold flex items-center justify-center gap-2">
+            <Link
+              href="/app/journey/share"
+              className="flex-1 bg-canvas text-ink rounded-full py-3 text-caption font-semibold flex items-center justify-center gap-2"
+            >
               <Share2 className="w-4 h-4" /> {locale === "vi" ? "Chia sẻ" : "Share"}
-            </button>
-            <button className="flex-1 bg-white/20 text-canvas rounded-full py-3 text-caption font-semibold flex items-center justify-center gap-2">
+            </Link>
+            <Link
+              href="/app/journey/share"
+              className="flex-1 bg-white/20 text-canvas rounded-full py-3 text-caption font-semibold flex items-center justify-center gap-2"
+            >
               <Download className="w-4 h-4" /> {locale === "vi" ? "Tải" : "Download"}
-            </button>
+            </Link>
           </div>
         </div>
       </FadeIn>
@@ -151,5 +157,4 @@ export default function Journey() {
     </div>
   );
 }
-
 

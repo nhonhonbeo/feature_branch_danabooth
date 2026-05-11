@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Passport, Stamp, Locale } from "@/types";
+import type {
+  DemoMode,
+  DemoPassportSeed,
+  Passport,
+  Stamp,
+  Locale,
+} from "@/types";
 
 interface PassportState {
   passport: Passport | null;
@@ -9,8 +15,14 @@ interface PassportState {
   locale: Locale;
   interests: string[];
   hasOnboarded: boolean;
+  demoMode: DemoMode;
+  pendingSeed: DemoPassportSeed | null;
   setLocale: (l: Locale) => void;
+  setDemoMode: (mode: DemoMode) => void;
   activate: (code: string, name?: string) => void;
+  loadSeedPassport: (seed: DemoPassportSeed) => void;
+  beginSeedActivation: (seed: DemoPassportSeed) => void;
+  completeSeedActivation: (name: string) => void;
   setInterests: (i: string[]) => void;
   completeOnboarding: () => void;
   collectStamp: (locationId: string, points: number) => Stamp | null;
@@ -27,8 +39,12 @@ export const usePassportStore = create<PassportState>()(
       locale: "vi",
       interests: [],
       hasOnboarded: false,
+      demoMode: "auto",
+      pendingSeed: null,
 
       setLocale: (l) => set({ locale: l }),
+
+      setDemoMode: (demoMode) => set({ demoMode }),
 
       activate: (code, name) =>
         set({
@@ -40,6 +56,44 @@ export const usePassportStore = create<PassportState>()(
             position: 1247 + Math.floor(Math.random() * 200),
             isActivated: true,
           },
+          pendingSeed: null,
+        }),
+
+      loadSeedPassport: (seed) =>
+        set({
+          passport: seed.passport,
+          stamps: seed.stamps,
+          redeemedVoucherIds: seed.redeemedVoucherIds,
+          hasOnboarded: seed.hasOnboarded,
+          interests: [],
+          pendingSeed: null,
+        }),
+
+      beginSeedActivation: (seed) =>
+        set({
+          passport: null,
+          stamps: [],
+          redeemedVoucherIds: [],
+          interests: [],
+          hasOnboarded: false,
+          pendingSeed: seed,
+        }),
+
+      completeSeedActivation: (name) =>
+        set((state) => {
+          if (!state.pendingSeed) return state;
+          return {
+            passport: {
+              ...state.pendingSeed.passport,
+              ownerName: name,
+              activatedAt: new Date().toISOString(),
+              isActivated: true,
+            },
+            stamps: state.pendingSeed.stamps,
+            redeemedVoucherIds: state.pendingSeed.redeemedVoucherIds,
+            hasOnboarded: state.pendingSeed.hasOnboarded,
+            pendingSeed: null,
+          };
         }),
 
       setInterests: (interests) => set({ interests }),
@@ -73,6 +127,7 @@ export const usePassportStore = create<PassportState>()(
           redeemedVoucherIds: [],
           interests: [],
           hasOnboarded: false,
+          pendingSeed: null,
         }),
     }),
     { name: "danangbooth-passport-v1" },

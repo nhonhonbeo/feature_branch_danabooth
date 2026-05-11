@@ -3,17 +3,12 @@
 import { useRouter } from "next/navigation";
 import { QrScanner } from "@/features/stamps/components/QrScanner";
 import { TopBar } from "@/components/layout/TopBar";
-import { usePassportStore } from "@/features/passport/store";
-
-
 
 export default function ActivateScan() {
   const nav = useRouter();
-  const activate = usePassportStore((s) => s.activate);
 
   const onResult = (code: string) => {
-    activate(code);
-    nav.push("");
+    nav.push(`/qr/${encodeURIComponent(code)}`);
   };
 
   return (
@@ -25,5 +20,3 @@ export default function ActivateScan() {
     </div>
   );
 }
-
-

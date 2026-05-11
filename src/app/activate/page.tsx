@@ -8,15 +8,15 @@ import { usePassportStore } from "@/features/passport/store";
 import { TopBar } from "@/components/layout/TopBar";
 import { api } from "@/services/api";
 
-
-
 export default function ActivatePage() {
   const { t, locale } = useLocale();
   const nav = useRouter();
   const activate = usePassportStore((s) => s.activate);
-  const [code, setCode] = useState("");
-  const [name, setName] = useState("");
-  const [step, setStep] = useState<0 | 1>(0);
+  const pendingSeed = usePassportStore((s) => s.pendingSeed);
+  const completeSeedActivation = usePassportStore((s) => s.completeSeedActivation);
+  const [code, setCode] = useState(() => pendingSeed?.passport.code ?? "");
+  const [name, setName] = useState(() => pendingSeed?.passport.ownerName ?? "");
+  const [step, setStep] = useState<0 | 1>(() => (pendingSeed ? 1 : 0));
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
@@ -33,7 +33,12 @@ export default function ActivatePage() {
   };
 
   const finish = () => {
-    activate(code, name);
+    const trimmedName = name.trim();
+    if (pendingSeed) {
+      completeSeedActivation(trimmedName || (locale === "vi" ? "Khách" : "Guest"));
+    } else {
+      activate(code, trimmedName || undefined);
+    }
     nav.push("/onboarding");
   };
 
@@ -90,9 +95,13 @@ export default function ActivatePage() {
               {locale === "vi" ? "Hành trình của ai?" : "Whose journey is this?"}
             </h1>
             <p className="text-body text-ink-muted mt-3">
-              {locale === "vi"
-                ? "Tên bạn sẽ xuất hiện trên thẻ kỷ niệm."
-                : "Your name will appear on your souvenir card."}
+              {pendingSeed
+                ? locale === "vi"
+                  ? `Mã ${pendingSeed.passport.code} đã hợp lệ. Nhập tên để hoàn tất kích hoạt.`
+                  : `Code ${pendingSeed.passport.code} is ready. Enter a name to complete activation.`
+                : locale === "vi"
+                  ? "Tên bạn sẽ xuất hiện trên thẻ kỷ niệm."
+                  : "Your name will appear on your souvenir card."}
             </p>
 
             <input
@@ -121,5 +130,3 @@ export default function ActivatePage() {
     </div>
   );
 }
-
-

@@ -1,6 +1,5 @@
-import Map, { Marker, NavigationControl, type MapRef } from "react-map-gl/maplibre";
+import Map, { Marker, NavigationControl, type MapRef } from "react-map-gl/mapbox";
 import { useRef, useEffect, type ReactNode } from "react";
-import "maplibre-gl/dist/maplibre-gl.css";
 
 interface MapViewProps {
   initialCenter?: { lat: number; lng: number };
@@ -12,8 +11,19 @@ interface MapViewProps {
   focus?: { lat: number; lng: number; zoom?: number } | null;
 }
 
-const STYLE_URL =
-  "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+const DEFAULT_STYLE_URL =
+  "https://api.mapbox.com/styles/v1/mapbox/standard?optimize=true";
+
+function resolveMapStyleUrl() {
+  const styleUrl = process.env.NEXT_PUBLIC_MAP_STYLE_URL?.trim();
+  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN?.trim();
+
+  const resolvedStyleUrl = styleUrl || DEFAULT_STYLE_URL;
+  if (!mapboxToken || resolvedStyleUrl.includes("access_token=")) return resolvedStyleUrl;
+
+  const separator = resolvedStyleUrl.includes("?") ? "&" : "?";
+  return `${resolvedStyleUrl}${separator}access_token=${encodeURIComponent(mapboxToken)}`;
+}
 
 export function MapView({
   initialCenter = { lat: 16.0606, lng: 108.2238 },
@@ -24,6 +34,8 @@ export function MapView({
   focus,
 }: MapViewProps) {
   const ref = useRef<MapRef | null>(null);
+  const mapStyle = resolveMapStyleUrl();
+  const mapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN?.trim();
 
   useEffect(() => {
     if (!focus || !ref.current) return;
@@ -39,7 +51,8 @@ export function MapView({
     <div className={"absolute inset-0 " + (className ?? "")}>
       <Map
         ref={ref}
-        mapStyle={STYLE_URL}
+        mapStyle={mapStyle}
+        mapboxAccessToken={mapboxAccessToken}
         initialViewState={{
           longitude: initialCenter.lng,
           latitude: initialCenter.lat,

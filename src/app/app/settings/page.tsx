@@ -6,11 +6,11 @@ import { TopBar } from "@/components/layout/TopBar";
 import { useLocale } from "@/hooks/useLocale";
 import { usePassportStore } from "@/features/passport/store";
 
-
-
 export default function SettingsPage() {
   const { locale, setLocale } = useLocale();
   const reset = usePassportStore((s) => s.reset);
+  const demoMode = usePassportStore((s) => s.demoMode);
+  const setDemoMode = usePassportStore((s) => s.setDemoMode);
   const nav = useRouter();
 
   return (
@@ -59,12 +59,44 @@ export default function SettingsPage() {
           />
         </Section>
 
+        <Section title={locale === "vi" ? "Demo quay video" : "Demo capture"}>
+          <Row
+            icon={<Info className="w-4 h-4" />}
+            label={locale === "vi" ? "Passport QR mode" : "Passport QR mode"}
+            right={
+              <div className="flex bg-parchment rounded-full p-0.5">
+                {([
+                  ["auto", locale === "vi" ? "Auto" : "Auto"],
+                  ["force_pending", locale === "vi" ? "Chưa active" : "Pending"],
+                  ["force_activated", locale === "vi" ? "Đã active" : "Activated"],
+                ] as const).map(([mode, label]) => (
+                  <button
+                    key={mode}
+                    onClick={() => setDemoMode(mode)}
+                    className={
+                      "px-3 py-1 rounded-full text-caption font-semibold " +
+                      (demoMode === mode ? "bg-canvas shadow-card" : "text-ink-soft")
+                    }
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            }
+          />
+          <div className="px-4 py-3 text-caption text-ink-soft">
+            {locale === "vi"
+              ? "QR passport demo: `demo-pending-passport` và `demo-activated-passport`."
+              : "Demo passport QR values: `demo-pending-passport` and `demo-activated-passport`."}
+          </div>
+        </Section>
+
         <Section title={locale === "vi" ? "Vùng nguy hiểm" : "Danger zone"}>
           <button
             onClick={() => {
               if (confirm(locale === "vi" ? "Xóa toàn bộ dữ liệu hành trình?" : "Erase all journey data?")) {
                 reset();
-                nav.push("");
+                nav.push("/");
               }
             }}
             className="w-full flex items-center gap-3 px-4 py-3.5 text-destructive"
@@ -116,7 +148,6 @@ function Row({
 }
 
 function Toggle({ defaultChecked }: { defaultChecked?: boolean }) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [on, setOn] = useStateLocal(defaultChecked);
   return (
     <button
@@ -140,5 +171,3 @@ import { useState } from "react";
 function useStateLocal<T>(v: T | undefined) {
   return useState<T>((v ?? false) as unknown as T);
 }
-
-

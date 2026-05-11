@@ -20,6 +20,30 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Map setup
+
+This repo renders maps with `Mapbox GL JS`.
+
+To enable the map locally:
+
+```bash
+cp .env.example .env.local
+```
+
+Then set:
+
+- `NEXT_PUBLIC_MAP_STYLE_URL`
+- `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN`
+
+Example:
+
+```env
+NEXT_PUBLIC_MAP_STYLE_URL=https://api.mapbox.com/styles/v1/mapbox/standard?optimize=true
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.your_mapbox_public_token_here
+```
+
+Restart `npm run dev` after changing env vars.
+
 ## AI Workflow
 
 Project-local AI workflow files are committed in this repo so the team can use the same structure without a global setup:
