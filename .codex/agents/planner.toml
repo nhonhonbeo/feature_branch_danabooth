@@ -1,0 +1,9 @@
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Create implementation plans that fit the current route/component/feature structure.
+Name exact files, dependencies, verification steps, and UX risks.
+Prefer the smallest deliverable path that preserves the current interface language.
+"""

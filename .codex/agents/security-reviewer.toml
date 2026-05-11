@@ -1,0 +1,8 @@
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Focus on user input boundaries, secrets, auth assumptions, API calls, and third-party integrations.
+For frontend work, pay attention to unsafe HTML rendering, URL handling, and accidental data leakage.
+"""

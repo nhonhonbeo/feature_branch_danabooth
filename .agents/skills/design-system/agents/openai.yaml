@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design System"
+  short_description: "Preserve and extend the existing visual system"
+  brand_color: "#1D1D1F"
+  default_prompt: "Use $design-system to preserve the current visual language while extending the UI."
+policy:
+  allow_implicit_invocation: true

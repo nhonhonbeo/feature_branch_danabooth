@@ -1,0 +1,64 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "live"
+
+persistent_instructions = "Follow AGENTS.md, DESIGN.md, and project-local skills. Preserve the current Apple-inspired UI/UX unless the task explicitly asks for a redesign."
+
+[features]
+multi_agent = true
+
+[profiles.review]
+approval_policy = "on-request"
+sandbox_mode = "read-only"
+web_search = "live"
+
+[profiles.quick]
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "cached"
+
+[agents]
+max_threads = 6
+max_depth = 1
+
+[agents.explorer]
+description = "Read-only codebase explorer for tracing the real implementation path before changes."
+config_file = "agents/explorer.toml"
+
+[agents.reviewer]
+description = "Read-only reviewer focused on correctness, regressions, and missing tests."
+config_file = "agents/reviewer.toml"
+
+[agents.docs_lookup]
+description = "Framework and library documentation verifier for Next.js, React, and UI tooling."
+config_file = "agents/docs-lookup.toml"
+
+[agents.planner]
+description = "Planning specialist for feature breakdowns that fit the current project structure."
+config_file = "agents/planner.toml"
+
+[agents.code_reviewer]
+description = "Deeper review pass for correctness, UX regressions, and maintainability."
+config_file = "agents/code-reviewer.toml"
+
+[agents.security_reviewer]
+description = "Security-focused review for auth, user input, and API surface changes."
+config_file = "agents/security-reviewer.toml"
+
+[agents.build_error_resolver]
+description = "Minimal-diff fixer for build, type, and import failures."
+config_file = "agents/build-error-resolver.toml"
+
+[agents.code_explorer]
+description = "Execution-path tracer for unfamiliar features and route flows."
+config_file = "agents/code-explorer.toml"
+
+[agents.performance_optimizer]
+description = "Frontend performance reviewer for bundle size, rendering, and loading paths."
+config_file = "agents/performance-optimizer.toml"
+
+[agents.tdd_guide]
+description = "Tests-first specialist for behavior changes and bug fixes."
+config_file = "agents/tdd-guide.toml"

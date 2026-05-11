@@ -1,0 +1,7 @@
+interface:
+  display_name: "Accessibility"
+  short_description: "WCAG checks for interactive UI"
+  brand_color: "#0F766E"
+  default_prompt: "Use $accessibility to audit interactive UI for accessibility regressions."
+policy:
+  allow_implicit_invocation: true

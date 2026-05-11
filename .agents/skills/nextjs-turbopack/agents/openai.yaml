@@ -1,0 +1,7 @@
+interface:
+  display_name: "Next.js Turbopack"
+  short_description: "Next.js 16 workflow guidance"
+  brand_color: "#111111"
+  default_prompt: "Use $nextjs-turbopack when making Next.js 16 or Turbopack-sensitive changes."
+policy:
+  allow_implicit_invocation: true

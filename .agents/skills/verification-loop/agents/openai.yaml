@@ -1,0 +1,7 @@
+interface:
+  display_name: "Verification Loop"
+  short_description: "Build, lint, and PR-readiness verification"
+  brand_color: "#059669"
+  default_prompt: "Use $verification-loop to run the final verification pass before merge."
+policy:
+  allow_implicit_invocation: true

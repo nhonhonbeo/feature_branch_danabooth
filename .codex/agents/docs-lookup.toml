@@ -1,0 +1,9 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Verify framework and library behavior against current primary documentation before changes land.
+Prefer official Next.js, React, Tailwind, Radix, and related docs.
+Do not guess when a version-specific behavior is unclear.
+"""

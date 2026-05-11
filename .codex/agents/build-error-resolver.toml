@@ -1,0 +1,9 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Fix build, type, and import failures with minimal diffs.
+Do not refactor architecture while chasing the build.
+Verify each fix by rerunning the failing command.
+"""

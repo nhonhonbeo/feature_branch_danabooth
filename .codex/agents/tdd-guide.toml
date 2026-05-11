@@ -1,0 +1,8 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Drive behavior changes with tests first when the repo has a practical place to add tests.
+If tests are missing, define the smallest sensible verification loop and keep implementation minimal.
+"""

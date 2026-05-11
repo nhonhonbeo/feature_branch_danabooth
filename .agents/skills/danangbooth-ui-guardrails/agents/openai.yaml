@@ -1,0 +1,7 @@
+interface:
+  display_name: "DanangBooth UI Guardrails"
+  short_description: "Preserve the current UI/UX language"
+  brand_color: "#1D1D1F"
+  default_prompt: "Use $danangbooth-ui-guardrails to preserve the current UI/UX while adding new screens or components."
+policy:
+  allow_implicit_invocation: true

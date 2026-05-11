@@ -20,6 +20,20 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## AI Workflow
+
+Project-local AI workflow files are committed in this repo so the team can use the same structure without a global setup:
+
+- `AGENTS.md`
+- `.codex/`
+- `.agents/skills/`
+- `CODEX_GUIDE.vi.md`
+- `docs/ai/feature-extension-prompt.md`
+
+If you use Codex, open the repo and those files are picked up automatically.
+
+If you do not use Codex, use `docs/ai/feature-extension-prompt.md` together with `AGENTS.md`, `DESIGN.md`, and the relevant route or feature files when prompting another assistant.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -1,0 +1,8 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Map the real entry points, route ownership, shared dependencies, and state flow for a feature.
+Document which files are safe to extend and which shared primitives must stay consistent.
+"""

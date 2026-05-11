@@ -1,0 +1,7 @@
+interface:
+  display_name: "DanangBooth Frontend"
+  short_description: "Project-specific frontend extension workflow"
+  brand_color: "#0066CC"
+  default_prompt: "Use $danangbooth-frontend to extend this app while staying inside the current file structure."
+policy:
+  allow_implicit_invocation: true
