@@ -12,6 +12,8 @@ interface PassportState {
   passport: Passport | null;
   stamps: Stamp[];
   redeemedVoucherIds: string[];
+  completedMissionIds: string[];
+  hasExportedJourneyRecap: boolean;
   locale: Locale;
   interests: string[];
   hasOnboarded: boolean;
@@ -27,6 +29,8 @@ interface PassportState {
   completeOnboarding: () => void;
   collectStamp: (locationId: string, points: number) => Stamp | null;
   redeemVoucher: (voucherId: string) => void;
+  toggleDemoMission: (missionId: string) => void;
+  markJourneyRecapExported: () => void;
   reset: () => void;
 }
 
@@ -36,6 +40,8 @@ export const usePassportStore = create<PassportState>()(
       passport: null,
       stamps: [],
       redeemedVoucherIds: [],
+      completedMissionIds: [],
+      hasExportedJourneyRecap: false,
       locale: "vi",
       interests: [],
       hasOnboarded: false,
@@ -64,6 +70,8 @@ export const usePassportStore = create<PassportState>()(
           passport: seed.passport,
           stamps: seed.stamps,
           redeemedVoucherIds: seed.redeemedVoucherIds,
+          completedMissionIds: [],
+          hasExportedJourneyRecap: false,
           hasOnboarded: seed.hasOnboarded,
           interests: [],
           pendingSeed: null,
@@ -74,6 +82,8 @@ export const usePassportStore = create<PassportState>()(
           passport: null,
           stamps: [],
           redeemedVoucherIds: [],
+          completedMissionIds: [],
+          hasExportedJourneyRecap: false,
           interests: [],
           hasOnboarded: false,
           pendingSeed: seed,
@@ -91,6 +101,8 @@ export const usePassportStore = create<PassportState>()(
             },
             stamps: state.pendingSeed.stamps,
             redeemedVoucherIds: state.pendingSeed.redeemedVoucherIds,
+            completedMissionIds: [],
+            hasExportedJourneyRecap: false,
             hasOnboarded: state.pendingSeed.hasOnboarded,
             pendingSeed: null,
           };
@@ -120,11 +132,22 @@ export const usePassportStore = create<PassportState>()(
           ),
         })),
 
+      toggleDemoMission: (missionId) =>
+        set((s) => ({
+          completedMissionIds: s.completedMissionIds.includes(missionId)
+            ? s.completedMissionIds.filter((id) => id !== missionId)
+            : [...s.completedMissionIds, missionId],
+        })),
+
+      markJourneyRecapExported: () => set({ hasExportedJourneyRecap: true }),
+
       reset: () =>
         set({
           passport: null,
           stamps: [],
           redeemedVoucherIds: [],
+          completedMissionIds: [],
+          hasExportedJourneyRecap: false,
           interests: [],
           hasOnboarded: false,
           pendingSeed: null,
