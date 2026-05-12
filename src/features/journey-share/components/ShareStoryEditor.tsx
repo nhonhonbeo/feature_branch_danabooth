@@ -30,6 +30,7 @@ export function ShareStoryEditor() {
   const { locale } = useLocale();
   const passport = usePassportStore((s) => s.passport);
   const stamps = usePassportStore((s) => s.stamps);
+  const markJourneyRecapExported = usePassportStore((s) => s.markJourneyRecapExported);
   const { data: locations = [] } = useSWR<Location[]>(["locations"], swrFetcher);
   const [status, setStatus] = useState<EditorStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -118,6 +119,7 @@ export function ShareStoryEditor() {
         routeOverlay,
       });
       setRenderResult(result);
+      markJourneyRecapExported();
       setStatus("preview_ready");
     } catch {
       setStatus("error");
