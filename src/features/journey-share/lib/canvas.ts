@@ -57,7 +57,7 @@ function drawRouteOverlay(
   const maxLat = Math.max(...lats);
   const lngSpan = Math.max(maxLng - minLng, 0.0001);
   const latSpan = Math.max(maxLat - minLat, 0.0001);
-  const padding = 28;
+  const padding = 36;
 
   const project = ([lng, lat]: number[]) => ({
     px: x + padding + ((lng - minLng) / lngSpan) * (width - padding * 2),
@@ -101,14 +101,6 @@ function drawRouteOverlay(
   ctx.arc(end.px, end.py, 11, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.fillStyle = "rgba(4, 12, 24, 0.78)";
-  ctx.beginPath();
-  ctx.roundRect(x + 18, y + 18, 148, 52, 26);
-  ctx.fill();
-  ctx.fillStyle = "#f8fbff";
-  ctx.font = '700 28px "Inter", "SF Pro Text", sans-serif';
-  ctx.fillText(`${routeOverlay.distanceKm.toFixed(1)} km`, x + 36, y + 52);
-
   ctx.restore();
 }
 
@@ -127,45 +119,64 @@ export async function generateShareCardCanvas(
   const background = await loadImage(options.backgroundSrc);
   drawCoverImage(ctx, background, width, height);
 
-  const gradient = ctx.createLinearGradient(0, height * 0.42, 0, height);
+  const gradient = ctx.createLinearGradient(0, height * 0.35, 0, height);
   gradient.addColorStop(0, "rgba(4, 12, 24, 0)");
-  gradient.addColorStop(0.42, "rgba(4, 12, 24, 0.42)");
-  gradient.addColorStop(1, "rgba(4, 12, 24, 0.92)");
+  gradient.addColorStop(0.42, "rgba(4, 12, 24, 0.6)");
+  gradient.addColorStop(1, "rgba(4, 12, 24, 0.98)");
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, width, height);
 
+  const marginX = 80;
+
+  ctx.fillStyle = "#f8fbff";
+  ctx.font = '600 48px "Inter", "SF Pro Text", sans-serif';
+  ctx.fillText("Danang Passport Story", marginX, 120);
+
+  ctx.font = '800 120px "Inter", "SF Pro Display", sans-serif';
+  ctx.fillText(options.ownerName, marginX, 1250);
+
+  // Mini map
+  const mapY = 1350;
+  const mapSize = 360;
   if (options.routeOverlay) {
     ctx.save();
     ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
     ctx.shadowBlur = 24;
-    drawRouteOverlay(ctx, options.routeOverlay, 56, 1200, 388, 468);
+    drawRouteOverlay(ctx, options.routeOverlay, marginX, mapY, mapSize, mapSize);
     ctx.restore();
   }
 
+  // Stops List
+  const listCardX = marginX + mapSize + 60; // 500
   ctx.fillStyle = "#f8fbff";
   ctx.font = '600 42px "Inter", "SF Pro Text", sans-serif';
-  ctx.fillText("Danang Passport Story", 56, 118);
-
-  ctx.font = '700 96px "Inter", "SF Pro Display", sans-serif';
-  ctx.fillText(options.ownerName, 56, 1325);
-
-  ctx.font = '500 34px "Inter", "SF Pro Text", sans-serif';
-  ctx.fillStyle = "rgba(248, 251, 255, 0.82)";
-  ctx.fillText(
-    `${options.points.length} stops • ${options.totalPoints} points`,
-    56,
-    1384,
-  );
-
-  ctx.fillStyle = "#f8fbff";
-  ctx.font = '600 36px "Inter", "SF Pro Text", sans-serif';
   options.points.slice(0, 5).forEach((point, index) => {
-    ctx.fillText(`• ${point.name}`, 486, 1228 + index * 70);
+    ctx.fillText(`• ${point.name}`, listCardX, mapY + 60 + index * 72);
   });
 
+  // Bottom Stats Row (Distance, Stops, Pts)
+  const statsY = 1780;
+  ctx.fillStyle = "rgba(248, 251, 255, 0.9)";
+  ctx.font = '500 42px "Inter", "SF Pro Text", sans-serif';
+  
+  if (options.routeOverlay) {
+    ctx.textAlign = "left";
+    ctx.fillText(`${options.routeOverlay.distanceKm.toFixed(1)} km`, marginX, statsY);
+  }
+
+  ctx.textAlign = "center";
+  ctx.fillText(`${options.points.length} stops`, width / 2, statsY);
+
+  ctx.textAlign = "right";
+  ctx.fillText(`${options.totalPoints} pts`, width - marginX, statsY);
+
+  // Reset alignment
+  ctx.textAlign = "left";
+
+  // Footer text
   ctx.fillStyle = "rgba(248, 251, 255, 0.72)";
-  ctx.font = '500 28px "Inter", "SF Pro Text", sans-serif';
-  ctx.fillText("Route powered by Mapbox", 56, 1838);
+  ctx.font = '500 32px "Inter", "SF Pro Text", sans-serif';
+  ctx.fillText("Route powered by Mapbox", marginX, 1860);
 
   return {
     dataUrl: canvas.toDataURL("image/png"),
