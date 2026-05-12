@@ -119,17 +119,27 @@ export async function generateShareCardCanvas(
   const background = await loadImage(options.backgroundSrc);
   drawCoverImage(ctx, background, width, height);
 
-  const gradient = ctx.createLinearGradient(0, height * 0.35, 0, height);
+  const gradient = ctx.createLinearGradient(0, height * 0.4, 0, height);
   gradient.addColorStop(0, "rgba(4, 12, 24, 0)");
-  gradient.addColorStop(0.42, "rgba(4, 12, 24, 0.6)");
-  gradient.addColorStop(1, "rgba(4, 12, 24, 0.98)");
+  gradient.addColorStop(0.4, "rgba(4, 12, 24, 0.5)");
+  gradient.addColorStop(1, "rgba(4, 12, 24, 0.92)");
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, width, height);
 
+  const topGradient = ctx.createLinearGradient(0, 0, 0, 260);
+  topGradient.addColorStop(0, "rgba(0, 0, 0, 0.4)");
+  topGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+  ctx.fillStyle = topGradient;
+  ctx.fillRect(0, 0, width, 260);
+
   const marginX = 80;
 
-  ctx.fillStyle = "#f8fbff";
-  ctx.font = '600 48px "Inter", "SF Pro Text", sans-serif';
+  ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+  ctx.shadowBlur = 16;
+  ctx.shadowOffsetY = 4;
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = '700 48px "Inter", "SF Pro Text", sans-serif';
   ctx.fillText("Danang Passport Story", marginX, 120);
 
   ctx.font = '800 120px "Inter", "SF Pro Display", sans-serif';
@@ -142,13 +152,14 @@ export async function generateShareCardCanvas(
     ctx.save();
     ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
     ctx.shadowBlur = 24;
+    ctx.shadowOffsetY = 0;
     drawRouteOverlay(ctx, options.routeOverlay, marginX, mapY, mapSize, mapSize);
     ctx.restore();
   }
 
   // Stops List
   const listCardX = marginX + mapSize + 60; // 500
-  ctx.fillStyle = "#f8fbff";
+  ctx.fillStyle = "#ffffff";
   ctx.font = '600 42px "Inter", "SF Pro Text", sans-serif';
   options.points.slice(0, 5).forEach((point, index) => {
     ctx.fillText(`• ${point.name}`, listCardX, mapY + 60 + index * 72);
@@ -156,7 +167,7 @@ export async function generateShareCardCanvas(
 
   // Bottom Stats Row (Distance, Stops, Pts)
   const statsY = 1780;
-  ctx.fillStyle = "rgba(248, 251, 255, 0.9)";
+  ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
   ctx.font = '500 42px "Inter", "SF Pro Text", sans-serif';
   
   if (options.routeOverlay) {
@@ -174,7 +185,7 @@ export async function generateShareCardCanvas(
   ctx.textAlign = "left";
 
   // Footer text
-  ctx.fillStyle = "rgba(248, 251, 255, 0.72)";
+  ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
   ctx.font = '500 32px "Inter", "SF Pro Text", sans-serif';
   ctx.fillText("Route powered by Mapbox", marginX, 1860);
 
