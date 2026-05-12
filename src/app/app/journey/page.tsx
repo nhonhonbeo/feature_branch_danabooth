@@ -8,13 +8,14 @@ import { swrFetcher } from "@/services/api";
 import type { Location } from "@/types";
 import { TopBar } from "@/components/layout/TopBar";
 import { usePassportStore } from "@/features/passport/store";
+import { useUserStamps } from "@/features/passport/hooks/useUserStamps";
 import { useLocale } from "@/hooks/useLocale";
 import { FadeIn, Stagger, StaggerItem } from "@/components/ui/motion-primitives";
 
 
 
 export default function Journey() {
-  const stamps = usePassportStore((s) => s.stamps);
+  const stamps = useUserStamps();
   const passport = usePassportStore((s) => s.passport);
   const { data: locations = [] } = useSWR<Location[]>(["locations"], swrFetcher);
   const { locale } = useLocale();

@@ -8,6 +8,7 @@ import { swrFetcher } from "@/services/api";
 import type { Location } from "@/types";
 import { TopBar } from "@/components/layout/TopBar";
 import { usePassportStore } from "@/features/passport/store";
+import { useUserStamps } from "@/features/passport/hooks/useUserStamps";
 import { useLocale } from "@/hooks/useLocale";
 import { CountUp } from "@/components/ui/count-up";
 import { FadeIn } from "@/components/ui/motion-primitives";
@@ -16,7 +17,7 @@ import { FadeIn } from "@/components/ui/motion-primitives";
 
 export default function Profile() {
   const passport = usePassportStore((s) => s.passport);
-  const stamps = usePassportStore((s) => s.stamps);
+  const stamps = useUserStamps();
   const { data: locations = [] } = useSWR<Location[]>(["locations"], swrFetcher);
   const { locale, setLocale } = useLocale();
 

@@ -12,6 +12,7 @@ import { LocationCard } from "@/features/map/components/LocationCard";
 import { swrFetcher } from "@/services/api";
 import { useUIStore } from "@/store/ui.store";
 import { usePassportStore } from "@/features/passport/store";
+import { useUserStamps } from "@/features/passport/hooks/useUserStamps";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useLocale } from "@/hooks/useLocale";
 import type { Location } from "@/types";
@@ -24,7 +25,7 @@ export default function HomeMap() {
   const cat = useUIStore((s) => s.selectedCategory);
   const search = useUIStore((s) => s.searchQuery);
   const setSearch = useUIStore((s) => s.setSearch);
-  const stamps = usePassportStore((s) => s.stamps);
+  const stamps = useUserStamps();
   const { coords, request } = useGeolocation();
   const { tr, locale } = useLocale();
   const [active, setActive] = useState<Location | null>(null);

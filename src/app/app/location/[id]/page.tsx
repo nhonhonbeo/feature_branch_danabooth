@@ -10,6 +10,7 @@ import { swrFetcher } from "@/services/api";
 import type { Location } from "@/types";
 import { useLocale } from "@/hooks/useLocale";
 import { usePassportStore } from "@/features/passport/store";
+import { useUserStamps } from "@/features/passport/hooks/useUserStamps";
 import { CATEGORIES } from "@/mocks/locations";
 import { TopBar } from "@/components/layout/TopBar";
 import { FadeIn } from "@/components/ui/motion-primitives";
@@ -24,7 +25,7 @@ export default function LocationDetail() {
     swrFetcher,
   );
   const { tr, locale } = useLocale();
-  const stamps = usePassportStore((s) => s.stamps);
+  const stamps = useUserStamps();
   const [expand, setExpand] = useState(false);
 
   if (isLoading || !loc) {
