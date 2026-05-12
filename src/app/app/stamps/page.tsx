@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { swrFetcher } from "@/services/api";
 import { TopBar } from "@/components/layout/TopBar";
 import { StampBadge } from "@/features/stamps/components/StampBadge";
-import { usePassportStore } from "@/features/passport/store";
+import { useUserStamps } from "@/features/passport/hooks/useUserStamps";
 import { useLocale } from "@/hooks/useLocale";
 import type { Location } from "@/types";
 import { Stagger, StaggerItem, FadeIn } from "@/components/ui/motion-primitives";
@@ -15,7 +15,7 @@ import { CountUp } from "@/components/ui/count-up";
 
 export default function Stamps() {
   const { data: locations = [] } = useSWR<Location[]>(["locations"], swrFetcher);
-  const stamps = usePassportStore((s) => s.stamps);
+  const stamps = useUserStamps();
   const { locale } = useLocale();
   const totalPoints = stamps.reduce((s, x) => s + x.points, 0);
 
