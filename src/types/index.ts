@@ -32,6 +32,12 @@ export interface Stamp {
   collectedAt: string; // ISO
   points: number;
   photoUrl?: string;
+  stampImageUrl?: string;
+  metadata?: {
+    title?: string;
+    description?: string;
+    isPublic?: boolean;
+  };
 }
 
 export interface Voucher {
@@ -63,6 +69,8 @@ export interface Passport {
   activatedAt?: string;
   position?: number; // user # in line
   isActivated: boolean;
+  issuingAuthority?: string;
+  country?: string;
 }
 
 export type DemoMode = "auto" | "force_pending" | "force_activated";
@@ -171,6 +179,12 @@ export interface ProfileSettings {
   notificationsSmsEnabled: boolean;
   accessibilityHighContrast: boolean;
   accessibilityFontScale: number; // 1.0 = normal, 1.2 = 20% larger
+  mapStyle?: "streets" | "satellite" | "light";
+  lastViewedLocationId?: string;
+  nearbyAutoCheckinRadiusMeters?: number;
+  followPrivacy?: "open" | "approval_required" | "private";
+  offlineProfileEnabled?: boolean;
+  offlineRecentDocsEnabled?: boolean;
 }
 
 export interface TravelDocument {
@@ -226,4 +240,117 @@ export interface UserRole {
   userId: string;
   role: "user" | "moderator" | "admin";
   grantedAt: string; // ISO
+}
+
+export interface TripItineraryItem {
+  id: string;
+  locationId?: string;
+  title: string;
+  startsAt?: string;
+  notes?: string;
+}
+
+export interface Trip {
+  id: string;
+  userId: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+  destinationIds: string[];
+  notes?: string;
+  itinerary: TripItineraryItem[];
+  isShared: boolean;
+}
+
+export interface LocalEmbassyContact {
+  country: string;
+  name: string;
+  phone: string;
+  address?: string;
+}
+
+export interface PaymentMethod {
+  id: string;
+  brand: string;
+  last4: string;
+  expiresAt: string;
+}
+
+export interface VoucherWallet {
+  redeemedVoucherIds: string[];
+  savedVoucherIds: string[];
+  paymentMethods: PaymentMethod[];
+}
+
+export interface ShareLink {
+  id: string;
+  scope: Array<keyof FieldVisibilityMap | "passport" | "badges" | "trips">;
+  qrValue: string;
+  expiresAt: string;
+  createdAt: string;
+}
+
+export interface Connection {
+  id: string;
+  userId: string;
+  displayName: string;
+  username: string;
+  status: "connected" | "following" | "follower" | "blocked";
+}
+
+export interface LocationReview {
+  id: string;
+  userId: string;
+  locationId: string;
+  note: string;
+  rating: number;
+  isPublic: boolean;
+  createdAt: string;
+}
+
+export interface VerificationWorkflow {
+  identityStatus: DocumentStatus;
+  documentStatus: DocumentStatus;
+  manualReviewNotes?: string;
+  ocrMetadata?: Record<string, string>;
+}
+
+export interface VerifiableBadge {
+  id: string;
+  label: string;
+  kind: "verified_traveler" | "travel_leader" | "host";
+  issuedAt: string;
+}
+
+export interface Reputation {
+  rating: number;
+  contributionCount: number;
+  verifiedIdentityBoost: boolean;
+}
+
+export interface ModerationState {
+  blockedUserIds: string[];
+  suspendedAt?: string;
+  suspensionReason?: string;
+}
+
+export interface AuditLog {
+  id: string;
+  action: string;
+  actorRole: UserRole["role"];
+  createdAt: string;
+  summary: string;
+}
+
+export interface ConsentLog {
+  id: string;
+  action: "share" | "export" | "delete_request";
+  scope: string;
+  createdAt: string;
+}
+
+export interface DataExport {
+  jsonReady: boolean;
+  vcardReady: boolean;
+  requestedAt?: string;
 }
